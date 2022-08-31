@@ -1,2 +1,2 @@
 # Praticando_Vue_STACKX
- Exemplos aulas práticas
+ Práticas do módulo Web 3.0
