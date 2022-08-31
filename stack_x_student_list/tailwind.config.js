@@ -4,7 +4,7 @@
 module.exports = {
   content: [
     './public/index.html',
-    "./src/**/*.{html,js, Vue}"
+    "./src/**/*.{html,js,vue}"
   ],
 
   theme: {
