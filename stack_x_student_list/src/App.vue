@@ -33,8 +33,41 @@
           </select>
         </div>
       </div>
-      <div>
 
+      <div class="overflow-x-auto relative shadow-md sm:rounded-lg mt-8">
+        <table class="w-full text-base text-left text-grey--400 bg-dark--400">
+          
+          <thead>
+            <tr>
+              <th scope="col" class="py-3 px-6">Nome</th>
+              <th scope="col" class="py-3 px-6">Sexo</th>
+              <th scope="col" class="py-3 px-6">Nacionalidade</th>
+              <th scope="col" class="py-3 px-6">Ação</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr class="border-t border-grey--200">
+              <th scope="row" class="py-4 px-6 font-medium whitespace-nowrap text-white--400">
+                Leonardo Santos
+              </th>
+              
+              <th class="py-4 px-6 font-medium text-white--400">
+                Masculino
+              </th>
+              
+              <th class="py-4 px-6 font-medium text-white--400">
+                Brasileiro
+              </th>
+              
+              <th class="py-4 px-6 font-medium text-white--400">
+                <button class="bg-dark--500 rounded py-0.5 px-1.5">
+                  Visualizar
+                </button>
+              </th>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
