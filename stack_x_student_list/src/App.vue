@@ -100,6 +100,7 @@
     data() {
       return {
         loading: false,
+        showModal: false,
         search: '',
         searchCountry: ''
       }
