@@ -18,6 +18,8 @@
             type="text"
             placeholder="Nome do aluno" 
             class="bg-dark--400 rounded-lg mt-2 border-none py-3 px-5 text-white--600 text-base"
+            @keyup="onSearch"
+            v-model="search"
           />
         </div>
 
@@ -28,8 +30,17 @@
           <select 
             name="nacionalidade" 
             id="nacionalidade"
-            class="bg-dark--400 rounded-lg mt-2 border-none py-3 px-5 text-white--600 text-base hover:cursor-pointer">
+            class="bg-dark--400 rounded-lg mt-2 border-none py-3 px-5 text-white--600 text-base hover:cursor-pointer"
+            @change="onSearch"
+            v-model="searchCountry"
+          >
             <option value="">Todas</option>
+            <option 
+              v-for="nat in $store.state.dataUser"
+              :key="nat.location.country.pastcode"
+            >
+              {{nat.location.country}}
+            </option>
           </select>
         </div>
       </div>
@@ -47,17 +58,20 @@
           </thead>
 
           <tbody>
-            <tr class="border-t border-grey--200">
+            <tr class="border-t border-grey--200"
+                v-for="user in onSearch()"
+                :key="user.id.value"
+            >
               <th scope="row" class="py-4 px-6 font-medium whitespace-nowrap text-white--400">
-                Leonardo Santos
+                {{ `${user.name.first} ${user.name.last}` }}
               </th>
               
               <th class="py-4 px-6 font-medium text-white--400">
-                Masculino
+                {{user.gender}}
               </th>
               
               <th class="py-4 px-6 font-medium text-white--400">
-                Brasileiro
+                {{user.location.country}}
               </th>
               
               <th class="py-4 px-6 font-medium text-white--400">
@@ -80,8 +94,37 @@
     name: 'App',
 
     components: {
-    HeaderComponent,
-}
+      HeaderComponent,
+    },
+
+    data() {
+      return {
+        loading: false,
+        search: '',
+        searchCountry: ''
+      }
+    },
+
+    created() {
+      this.loading = true;
+      this.$store.dispatch('getUsers').finally(() => {
+        this.loading = false;
+      })
+    },
+
+    methods: {
+      onSearch() {
+        if (this.search.length > 0) {
+          return this.$store.state.dataUser.filter(a => (a.name.first.toUpperCase() ||a.name.last.toUpperCase()).includes(this.search.toUpperCase()))
+        } 
+        else if (this.searchCountry.length > 0) {
+          return this.$store.state.dataUser.filter(a => (a.location.country.toUpperCase()).includes(this.searchCountry.toUpperCase()))
+        }
+        else {
+          return this.$store.state.dataUser;
+        }
+      }
+    },
   }
 </script>
 
